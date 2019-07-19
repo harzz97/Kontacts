@@ -4,4 +4,8 @@
     <string name="action_save">Save</string>
     <string name="action_login">Login</string>
     <string name="action_singup">Sign up</string>
+    <string name="user_name">Name</string>
+    <string name="user_phone_number">Phonenumber</string>
+    <string name="action_text_create">Create User</string>
+    <string name="action_text_edit">Edit User</string>
 </resources>
