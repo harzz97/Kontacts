@@ -9,7 +9,7 @@ import io.github.harzz.kontacts.R
 import io.github.harzz.kontacts.repository.entity.Contacts
 import kotlinx.android.synthetic.main.content_row_recycler_view.view.*
 
-class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
+class ContactsAdapter(val listener : (Contacts) -> Unit) : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
 
     private var allContacts : List<Contacts> = ArrayList()
 
@@ -23,9 +23,15 @@ class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>
     }
 
     override fun onBindViewHolder(holder: ContactsViewHolder, position: Int) {
+
         val currentContact = allContacts.get(position)
         holder.userName.text = currentContact.user_name
         holder.userPhoneNumber.text = currentContact.user_phone_number
+
+        holder.itemView.setOnClickListener {
+            listener(currentContact)
+        }
+
     }
 
     fun setNotes(contacts : List<Contacts>) {
