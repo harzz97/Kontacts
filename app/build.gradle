@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    apply plugin:'kotlin-kapt'
     def room_version = "2.2.0-alpha01" // 2.1.0 for latest stable version
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -35,8 +36,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-
+    kapt "androidx.room:room-compiler:$room_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
