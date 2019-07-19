@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Kontacts</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_save">Save</string>
+    <string name="action_login">Login</string>
+    <string name="action_singup">Sign up</string>
 </resources>
