@@ -19,12 +19,12 @@ interface ContactsDao {
     fun deleteAllNotes()
 
     //return only users who belong to current_user
-    @Query("SELECT user_name,user_phone_number from contacts_table where owner = :owner")
-    fun getContacts(owner:String) : LiveData<List<Contacts>>
+    @Query("SELECT * from contacts_table where owner = :owner ")
+    fun getContacts(owner : String) : LiveData<List<Contacts>>
 
     //delete a particular contact
-    @Query("Delete from contacts_table where id = :_id")
-    fun deleteSingleContact(_id : Int)
+    @Query("Delete from contacts_table where id = :id")
+    fun deleteSingleContact(id : Int)
 
     //update the current user
     @Update
