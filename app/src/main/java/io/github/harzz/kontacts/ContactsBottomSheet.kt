@@ -33,10 +33,10 @@ class ContactsBottomSheet : BottomSheetDialogFragment() {
         super.onActivityCreated(savedInstanceState)
 
         //if arguments are present then its edit
-        if(!arguments!!.isEmpty){
+        if(arguments != null && !arguments!!.isEmpty){
             editText_user_name.setText(arguments!!.getString("user_name"))
             editText_user_phone_number.setText(arguments!!.getString("user_phone_number"))
-            txt_bottom_sheet_title.setText("Edit User")
+            txt_bottom_sheet_title.setText("Edit UsersDao")
         }
 
         viewModel = ViewModelProviders.of(this).get(ContactsViewModel::class.java)
@@ -47,8 +47,9 @@ class ContactsBottomSheet : BottomSheetDialogFragment() {
                 Log.v("CBS","VALIDUSERNAME")
                 val name = editText_user_name.editableText.trim().toString()
                 val number = editText_user_phone_number.editableText.trim().toString()
-                val contact = Contacts("Suresh",name,number)
+                val contact = Contacts("Harzz",name,number)
                 viewModel.insert(contact)
+                
             }else{
                 Log.v("CBS","INVALID")
             }
