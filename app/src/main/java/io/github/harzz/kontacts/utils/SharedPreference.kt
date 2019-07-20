@@ -1,7 +1,8 @@
-package io.github.harzz.kontacts
+package io.github.harzz.kontacts.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import io.github.harzz.kontacts.R
 
 class SharedPreference (){
 
@@ -13,7 +14,8 @@ class SharedPreference (){
                 if (customPreference != null) {
                     return customPreference as SharedPreference
                 } else {
-                    customPreference = SharedPreference()
+                    customPreference =
+                        SharedPreference()
                     return customPreference as SharedPreference
                 }
             }
