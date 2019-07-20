@@ -38,15 +38,16 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = ContactsAdapter(){
-            Log.v("MA",it.user_name)
             //TODO: Create a serializable to share between sheet and recyclerview
+            val editSheet = ContactsBottomSheet.newInstance()
             val bundle = Bundle()
             bundle.putInt("id",it.id)
             bundle.putString("owner",it.owner)
             bundle.putString("user_name",it.user_name)
             bundle.putString("user_phone_number",it.user_phone_number)
-            contactsBottomSheet.arguments = bundle
-            contactsBottomSheet.show(supportFragmentManager,"edit_bottom_sheet")
+            editSheet.arguments = bundle
+            editSheet.show(supportFragmentManager,"edit_bottom_sheet")
+            Log.v("MA",it.user_name+" "+bundle.getString("user_name"))
         }
 
         recyclerView.adapter = adapter
