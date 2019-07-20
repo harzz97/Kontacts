@@ -8,4 +8,6 @@
     <string name="user_phone_number">Phonenumber</string>
     <string name="action_text_create">Create User</string>
     <string name="action_text_edit">Edit User</string>
+    <string name="preference_user_info">none</string>
+    <string name="preference_is_logged_in">no</string>
 </resources>
