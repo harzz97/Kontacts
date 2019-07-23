@@ -1,29 +1,18 @@
 package io.github.harzz.kontacts
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
-import androidx.core.text.set
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.harzz.kontacts.adapter.ContactsAdapter
 import io.github.harzz.kontacts.repository.entity.Contacts
 import io.github.harzz.kontacts.utils.SharedPrefManager
-import io.github.harzz.kontacts.utils.SharedPreference
 import io.github.harzz.kontacts.viewmodel.ContactsViewModel
-
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.contacts_bottom_sheet_fragment.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         val contactsBottomSheet = ContactsBottomSheet.newInstance()
 
-        val recyclerView = contacts_recycler_view
+        val recyclerView : CustomRecyclerView = contacts_recycler_view as CustomRecyclerView
+        recyclerView.setEmptyView(txt_empty_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = ContactsAdapter(){
