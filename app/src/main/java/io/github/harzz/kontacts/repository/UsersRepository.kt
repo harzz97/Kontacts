@@ -1,7 +1,7 @@
 package io.github.harzz.kontacts.repository
 
 import android.app.Application
-import android.os.AsyncTask
+import androidx.lifecycle.LiveData
 import io.github.harzz.kontacts.repository.dao.UsersDao
 import io.github.harzz.kontacts.repository.database.UserDatabase
 import io.github.harzz.kontacts.repository.entity.Users
@@ -9,21 +9,27 @@ import io.github.harzz.kontacts.repository.entity.Users
 class UsersRepository(application: Application){
 
     private var usersDao : UsersDao
+    var allUsers : LiveData<List<String>>
 
     init {
         val database:UserDatabase = UserDatabase.getInstance(application.applicationContext)
         usersDao = database.userDao()
-    }
-
-    fun insertNewUser(users: Users){
-        InsertNewUserAsyncTask(usersDao).execute(users)
+        allUsers = usersDao.getAllUsers()
     }
 
 
-    private class  InsertNewUserAsyncTask(val usersDao: UsersDao) : AsyncTask<Users,Unit,Unit>(){
-        override fun doInBackground(vararg p0: Users?) {
-            usersDao.insert(p0[0]!!)
-        }
+    fun insertNewUser(users: Users) {
+        Thread(Runnable {
+            usersDao.insert(users).toInt()
+        }).start()
+    }
+
+    fun getSingleUser(userEmail : String) : LiveData<Users>? {
+        return usersDao.getUserDetails(userEmail)
+    }
+
+    fun getAllUser(): LiveData<List<String>>{
+        return allUsers;
     }
 
 }
