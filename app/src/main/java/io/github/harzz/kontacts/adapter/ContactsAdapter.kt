@@ -3,7 +3,6 @@ package io.github.harzz.kontacts.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.harzz.kontacts.R
 import io.github.harzz.kontacts.repository.entity.Contacts
@@ -27,14 +26,13 @@ class ContactsAdapter(val listener : (Contacts) -> Unit) : RecyclerView.Adapter<
         val currentContact = allContacts.get(position)
         holder.userName.text = currentContact.user_name
         holder.userPhoneNumber.text = currentContact.user_phone_number
-
         holder.itemView.setOnClickListener {
             listener(currentContact)
         }
 
     }
 
-    fun setNotes(contacts : List<Contacts>) {
+    fun setContacts(contacts : List<Contacts>) {
         allContacts = contacts
         notifyDataSetChanged()
     }
