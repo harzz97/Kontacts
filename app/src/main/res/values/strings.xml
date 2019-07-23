@@ -10,4 +10,5 @@
     <string name="action_text_edit">Edit User</string>
     <string name="preference_user_info">none</string>
     <string name="preference_is_logged_in">no</string>
+    <string name="action_delete">Delete</string>
 </resources>
