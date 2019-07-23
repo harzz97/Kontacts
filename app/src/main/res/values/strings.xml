@@ -11,4 +11,12 @@
     <string name="preference_user_info">none</string>
     <string name="preference_is_logged_in">no</string>
     <string name="action_delete">Delete</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup_title">Create New Account</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_subtitle">to continue to Kontacts</string>
+    <string name="sign_up_prompt">Don\'t have an account ?</string>
+    <string name="empty_string">Wow, such empty \n Go ahead and save your first contact</string>
 </resources>
