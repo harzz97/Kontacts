@@ -6,8 +6,9 @@ import androidx.lifecycle.LiveData
 import io.github.harzz.kontacts.repository.dao.ContactsDao
 import io.github.harzz.kontacts.repository.database.ContactsDatabase
 import io.github.harzz.kontacts.repository.entity.Contacts
+import io.github.harzz.kontacts.utils.SharedPrefManager
 
-class ContactsRepository(application: Application) {
+class ContactsRepository(val application: Application) {
 
     private var contactsDao : ContactsDao
 
@@ -26,7 +27,7 @@ class ContactsRepository(application: Application) {
     }
 
     fun deleteContact(contacts: Contacts){
-//        DeleteContactsAsyncTask(contactsDao).execute(contacts.id)
+        DeleteContactsAsyncTask(contactsDao).execute(contacts)
     }
 
     fun updateContact(contacts: Contacts){
@@ -34,7 +35,8 @@ class ContactsRepository(application: Application) {
     }
 
     fun getAllContacts() : LiveData<List<Contacts>>{
-        return contactsDao.getContacts("Harzz");
+        val owner = SharedPrefManager(application.applicationContext).currentUserInfo
+        return contactsDao.getContacts(owner!!);
     }
 
     private class InsertContactsAsyncTask(val contactsDao: ContactsDao) : AsyncTask<Contacts,Unit,Unit>(){
@@ -46,8 +48,7 @@ class ContactsRepository(application: Application) {
     private class DeleteContactsAsyncTask(val contactsDao: ContactsDao) : AsyncTask<Contacts,Unit,Unit>(){
 
         override fun doInBackground(vararg p0: Contacts?) {
-            //TODO:decide whether to pass id or contact object
-//            contactsDao.deleteSingleContact(p0[0]!!)
+            contactsDao.deleteSingleContact(p0[0]!!)
         }
     }
 
