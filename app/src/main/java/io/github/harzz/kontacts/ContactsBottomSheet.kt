@@ -1,17 +1,14 @@
 package io.github.harzz.kontacts
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.text.isDigitsOnly
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.harzz.kontacts.repository.entity.Contacts
-import io.github.harzz.kontacts.utils.SharedPrefManager
 import io.github.harzz.kontacts.viewmodel.ContactsViewModel
 import kotlinx.android.synthetic.main.contacts_bottom_sheet_fragment.*
 
@@ -67,6 +64,8 @@ class ContactsBottomSheet : BottomSheetDialogFragment() {
                 val contact = Contacts(owner,userName,phoneNumber)
                 if(isNewContact) viewModel.insert(contact)
                 else viewModel.updateSingleContact(contact)
+                editText_user_phone_number.setText("")
+                editText_user_name.setText("")
                 dismiss()
             }else{
                 if(!validateUserPhoneNumber(phoneNumber))
