@@ -21,4 +21,6 @@ class SharedPrefManager (val context: Context){
             R.string.preference_user_info
         ), userInfo)
 
+    fun clearPref() = SharedPreference.instance.clearPreferences(context)
+
 }
