@@ -1,10 +1,7 @@
 package io.github.harzz.kontacts.repository.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import io.github.harzz.kontacts.repository.entity.Contacts
 
 @Dao
@@ -23,8 +20,8 @@ interface ContactsDao {
     fun getContacts(owner : String) : LiveData<List<Contacts>>
 
     //delete a particular contact
-    @Query("Delete from contacts_table where id = :id")
-    fun deleteSingleContact(id : Int)
+    @Delete
+    fun deleteSingleContact(contacts: Contacts)
 
     //update the current user
     @Update
