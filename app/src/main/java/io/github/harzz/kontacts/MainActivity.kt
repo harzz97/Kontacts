@@ -1,5 +1,7 @@
 package io.github.harzz.kontacts
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.harzz.kontacts.adapter.ContactsAdapter
 import io.github.harzz.kontacts.repository.entity.Contacts
+import io.github.harzz.kontacts.utils.SharedPrefManager
+import io.github.harzz.kontacts.utils.SharedPreference
 import io.github.harzz.kontacts.viewmodel.ContactsViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,13 +45,13 @@ class MainActivity : AppCompatActivity() {
             //TODO: Create a serializable to share between sheet and recyclerview
             val editSheet = ContactsBottomSheet.newInstance()
             val bundle = Bundle()
-            bundle.putInt("id",it.id)
+            bundle.putString("id",it.id.toString())
             bundle.putString("owner",it.owner)
             bundle.putString("user_name",it.user_name)
             bundle.putString("user_phone_number",it.user_phone_number)
             editSheet.arguments = bundle
             editSheet.show(supportFragmentManager,"edit_bottom_sheet")
-            Log.v("MA",it.user_name+" "+bundle.getString("user_name"))
+
         }
 
         recyclerView.adapter = adapter
@@ -55,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         contactsViewModel.getAllContacts().observe(this,
             Observer<List<Contacts>> {
                 //observe for changes and update adapter
-                    t -> adapter.setNotes(t!!)
+                    t -> adapter.setContacts(t!!)
             })
 
         //when user press fab display bottomsheet to create new contact
@@ -78,8 +82,19 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_logout -> true
+            R.id.action_logout -> {
+                SharedPrefManager(this).clearPref()
+                navigateToHome()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun navigateToHome(){
+        val loginPageIntent = Intent(this, LoginActivity::class.java)
+        startActivity(loginPageIntent)
+        finish()
+    }
+
 }
