@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.github.harzz.kontacts.repository.ContactsRepository
 import io.github.harzz.kontacts.repository.entity.Contacts
+import io.github.harzz.kontacts.utils.SharedPrefManager
 
 class ContactsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,7 +18,9 @@ class ContactsViewModel(application: Application) : AndroidViewModel(application
 
     fun updateSingleContact(contacts: Contacts) = contactsRepository.updateContact(contacts)
 
-    fun deleteSingleContact( contacts: Contacts) = contactsRepository.updateContact(contacts)
+    fun deleteSingleContact( contacts: Contacts) = contactsRepository.deleteContact(contacts)
 
     fun getAllContacts() : LiveData<List<Contacts>> = allContacts
+
+    var owner : String = SharedPrefManager(application).currentUserInfo!!
 }
