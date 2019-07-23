@@ -33,15 +33,23 @@ class SharedPreference (){
         }
     }
 
-    //store the given key value pair in SharedPreference
-    //@param value is string
+    /**
+     * store the given key value pair in SharedPreference
+     * @param value is string
+     *
+     **/
     fun setValue(context: Context, key: String, value: String?) {
         getInstance(context)
         val editor = preference!!.edit()
         editor.putString(key, value)
         editor.apply()
     }
-
+    /**
+     *
+     * store a boolean value in shared preference
+     * @param value denotes boolean value
+     *
+     * */
     fun setValue(context: Context,key: String,value: Boolean?){
         getInstance(context)
         val editor = preference!!.edit()
@@ -57,6 +65,14 @@ class SharedPreference (){
     //return the string value for the given key
     fun getStringValue(context: Context, key: String): String? {
         return getInstance(context)!!.getString(key, null)
+    }
+
+    fun clearPreferences(context: Context) {
+        val preferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
+        //SharedPreferences preferences = context.getSharedPreferences("PREFERENCE", 0);
+        val editor = preferences.edit()
+        editor.clear()
+        editor.commit()
     }
 
 }
