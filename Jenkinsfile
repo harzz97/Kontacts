@@ -3,19 +3,13 @@ pipeline {
   stages {
     stage('clean') {
       steps {
-        dir(path: 'android') {
-          sh './gradlew clean'
-        }
-
+        sh './gradlew clean'
       }
     }
 
     stage('build debug') {
       steps {
-        dir(path: 'android') {
-          sh './gradlew assembledebug'
-        }
-
+        sh './gradlew assembledebug'
       }
     }
 
